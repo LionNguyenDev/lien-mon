@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f5ebd7;
+  --foreground: #1f3a5f;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  /* Playfair mặc định dùng số kiểu cổ (old-style), đổi sang số thẳng hàng cho dễ đọc */
+  font-variant-numeric: lining-nums;
+}
+
+@layer base {
+  ::selection {
+    background: rgba(200, 150, 62, 0.35);
+  }
+
+  :focus-visible {
+    outline: 3px solid #c8963e;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Giấy cũ: lớp vân mờ dùng chung cho các trang nền kem */
+  .paper-texture {
+    background-color: #f5ebd7;
+    background-image: radial-gradient(circle at 15% 10%, rgba(200, 150, 62, 0.12), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(181, 67, 47, 0.08), transparent 40%),
+      repeating-linear-gradient(0deg, rgba(31, 58, 95, 0.025) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, rgba(31, 58, 95, 0.025) 0 1px, transparent 1px 28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
