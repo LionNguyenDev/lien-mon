@@ -4,46 +4,82 @@ import { HeroBackdrop } from '@/components/journey/hero-backdrop';
 import { LandmarkArt } from '@/components/journey/landmark-art';
 import { Icon } from '@/components/ui/icons';
 import { LOCATIONS } from '@/data/locations';
+import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 import { cn } from '@/lib/utils';
 import { type PointerEvent, type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 const INTERVAL = 5500;
+// Chiều cao dải giấy dưới ảnh (ghi tên địa điểm) và viền khung, dùng để tính cỡ ảnh vừa khung.
+const CAPTION_HEIGHT = 64;
+const FRAME_PADDING = 10;
 
-type Slide = { key: string; title: string; label: string; image?: string; imageAlt: string };
+type Slide = { key: string; title: string; label: string; image?: { src: string; alt: string } };
 
 const SLIDES: Slide[] = [
-  { key: 'city', title: 'TP. Hồ Chí Minh', label: 'HÀNH TRÌNH DI SẢN', imageAlt: 'Đường chân trời TP. Hồ Chí Minh' },
+  {
+    key: 'city',
+    title: 'TP. Hồ Chí Minh',
+    label: 'HÀNH TRÌNH DI SẢN',
+    image: {
+      src: '/images/dinh-doc-lap/toan-canh.jpg',
+      alt: 'Toàn cảnh trung tâm TP. Hồ Chí Minh nhìn từ trên cao, Dinh Độc Lập giữa mảng cây xanh',
+    },
+  },
   ...LOCATIONS.map((location) => ({
     key: location.id,
     title: location.name,
     label: location.label,
-    image: location.image,
-    imageAlt: location.imageAlt,
+    image: location.images?.[0],
   })),
 ];
 
-function SlideArt({ slide }: { slide: Slide }) {
-  if (slide.image) {
-    return <img src={slide.image} alt='' className='h-full w-full object-cover' />;
-  }
-  if (slide.key === 'city') return <HeroBackdrop />;
-  return <LandmarkArt id={slide.key} className='h-full w-full' />;
-}
+/**
+ * Ảnh đặt trong khung bưu thiếp, giữ nguyên tỉ lệ nên không bị cắt mất chữ hay biển hiệu trong ảnh.
+ * Khung co theo tỉ lệ thật của ảnh (đọc khi ảnh tải xong) và vừa vùng chứa nhờ đơn vị container query.
+ */
+function PostcardFrame({ slide, index, active }: { slide: Slide; index: number; active: boolean }) {
+  const [ratio, setRatio] = useState(4 / 3);
+  const readRatio = (img: HTMLImageElement | null) => {
+    if (img?.complete && img.naturalWidth) setRatio(img.naturalWidth / img.naturalHeight);
+  };
+  const width = `min(100cqw, calc((100cqh - ${CAPTION_HEIGHT + FRAME_PADDING}px) * ${ratio} + ${FRAME_PADDING * 2}px))`;
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const onChange = () => setReduced(query.matches);
-    query.addEventListener('change', onChange);
-    return () => query.removeEventListener('change', onChange);
-  }, []);
-  return reduced;
+  return (
+    <div
+      className={cn(
+        'rounded-sm bg-paper-light shadow-[0_30px_60px_-20px_rgba(0,0,0,0.65)] ring-1 ring-black/10',
+        index % 2 === 0 ? '-rotate-1' : 'rotate-1',
+        active && 'motion-safe:animate-postcard-in'
+      )}
+      style={{ width, padding: `${FRAME_PADDING}px ${FRAME_PADDING}px 0` }}
+    >
+      <div className='relative overflow-hidden bg-navy-dark' style={{ aspectRatio: ratio }}>
+        {slide.image ? (
+          <img
+            ref={readRatio}
+            src={slide.image.src}
+            alt={slide.image.alt}
+            onLoad={(e) => readRatio(e.currentTarget)}
+            className='absolute inset-0 h-full w-full object-cover'
+          />
+        ) : (
+          <LandmarkArt id={slide.key} className='absolute inset-0 h-full w-full' />
+        )}
+      </div>
+      <div className='flex flex-col justify-center px-1' style={{ height: CAPTION_HEIGHT }}>
+        <span className='font-semibold text-[10px] text-brick uppercase tracking-[0.22em] sm:text-[11px]'>
+          {String(index + 1).padStart(2, '0')}/{String(SLIDES.length).padStart(2, '0')} · {slide.label}
+        </span>
+        <span className='truncate font-bold font-display text-base text-navy sm:text-lg'>{slide.title}</span>
+      </div>
+    </div>
+  );
 }
 
 /**
- * Nền trang bắt đầu: ảnh các địa điểm tự chuyển, có nút trước/sau, chấm chọn ảnh và tạm dừng.
- * `children` là nội dung hiển thị phía trên ảnh; vuốt ngang ở bất kỳ đâu trên màn hình đều đổi ảnh.
+ * Trang bắt đầu dạng chia đôi: `children` (tiêu đề, nút bắt đầu) nằm trên nền riêng,
+ * ảnh các địa điểm tự chuyển ở phần còn lại nên chữ không bao giờ che ảnh.
+ * Có nút trước/sau, chấm chọn ảnh, tạm dừng; vuốt ngang trên vùng ảnh để đổi ảnh.
  */
 export function HeroCarousel({ children }: { children: ReactNode }) {
   const reducedMotion = usePrefersReducedMotion();
@@ -73,104 +109,115 @@ export function HeroCarousel({ children }: { children: ReactNode }) {
   const current = SLIDES[index];
 
   return (
-    <div
-      className='relative flex min-h-[100svh] touch-pan-y flex-col'
-      onPointerDown={onPointerDown}
-      onPointerUp={onPointerUp}
-      onPointerCancel={() => {
-        swipeStart.current = null;
-      }}
-    >
-      <section aria-roledescription='carousel' aria-label='Hình ảnh các địa điểm di sản' className='absolute inset-0'>
+    <div className='flex min-h-[100svh] flex-col bg-navy-deep lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]'>
+      <section
+        aria-roledescription='carousel'
+        aria-label='Hình ảnh các địa điểm di sản'
+        className='relative flex h-[50svh] min-h-[340px] touch-pan-y flex-col overflow-hidden sm:h-[56svh] lg:order-last lg:h-auto lg:min-h-[100svh]'
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => {
+          swipeStart.current = null;
+        }}
+        onMouseEnter={() => setInteracting(true)}
+        onMouseLeave={() => setInteracting(false)}
+        onFocus={() => setInteracting(true)}
+        onBlur={() => setInteracting(false)}
+      >
+        {/* Nền: chính ảnh đang hiện, làm mờ và tối đi */}
         {SLIDES.map((slide, i) => (
           <div
-            key={slide.key}
-            role='group'
-            aria-roledescription='slide'
-            aria-label={`${i + 1} / ${SLIDES.length}: ${slide.title}`}
-            aria-hidden={i !== index}
+            key={`bg-${slide.key}`}
+            aria-hidden='true'
             className={cn(
-              'absolute inset-0 overflow-hidden transition-opacity duration-1000 ease-out',
+              'absolute inset-0 transition-opacity duration-1000 ease-out',
               i === index ? 'opacity-100' : 'opacity-0'
             )}
           >
-            {/* key đổi theo index để hiệu ứng zoom chậm chạy lại mỗi lần ảnh xuất hiện */}
-            <div
-              key={i === index ? `active-${index}` : 'idle'}
-              className={cn('h-full w-full', i === index && 'motion-safe:animate-ken-burns')}
-            >
-              <SlideArt slide={slide} />
-            </div>
+            {slide.image ? (
+              <img src={slide.image.src} alt='' className='h-full w-full scale-110 object-cover blur-2xl' />
+            ) : (
+              <HeroBackdrop />
+            )}
           </div>
         ))}
+        <div className='absolute inset-0 bg-navy-deep/55' />
 
-        <div className='pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-navy-deep/45 to-navy-deep/40' />
+        <div className='relative flex-1'>
+          {SLIDES.map((slide, i) => (
+            <div
+              key={slide.key}
+              role='group'
+              aria-roledescription='slide'
+              aria-label={`${i + 1} / ${SLIDES.length}: ${slide.title}`}
+              aria-hidden={i !== index}
+              className={cn(
+                'absolute inset-0 grid place-items-center px-6 pt-8 pb-2 transition-opacity duration-700 ease-out [container-type:size] sm:px-10 lg:px-14 lg:pt-14',
+                i === index ? 'opacity-100' : 'pointer-events-none opacity-0'
+              )}
+            >
+              <PostcardFrame slide={slide} index={i} active={i === index} />
+            </div>
+          ))}
+        </div>
 
         {/* Thanh điều khiển */}
-        <div
-          className='absolute inset-x-0 bottom-20 z-20 px-4 sm:bottom-14 sm:px-6'
-          onMouseEnter={() => setInteracting(true)}
-          onMouseLeave={() => setInteracting(false)}
-          onFocus={() => setInteracting(true)}
-          onBlur={() => setInteracting(false)}
-        >
-          <div className='mx-auto flex max-w-6xl flex-col items-center gap-3 sm:flex-row sm:justify-between'>
-            <p aria-live={playing ? 'off' : 'polite'} className='text-center sm:text-left'>
-              <span className='block font-semibold text-[11px] text-brass-light uppercase tracking-[0.2em]'>
-                {String(index + 1).padStart(2, '0')}/{String(SLIDES.length).padStart(2, '0')} · {current.label}
-              </span>
-              <span className='font-bold font-display text-lg text-paper'>{current.title}</span>
-            </p>
-
-            <div className='flex items-center gap-1'>
+        <div className='relative flex items-center justify-center gap-1 pt-1 pb-3 lg:pb-8'>
+          <p className='sr-only' aria-live={playing ? 'off' : 'polite'}>
+            Ảnh {index + 1}/{SLIDES.length}: {current.title}
+          </p>
+          <button
+            type='button'
+            onClick={() => go(index - 1)}
+            aria-label='Ảnh trước'
+            className='grid size-11 cursor-pointer place-items-center rounded-full text-paper transition-colors hover:bg-paper/15'
+          >
+            <Icon.arrowLeft size={20} />
+          </button>
+          <div className='flex items-center'>
+            {SLIDES.map((slide, i) => (
               <button
+                key={slide.key}
                 type='button'
-                onClick={() => go(index - 1)}
-                aria-label='Ảnh trước'
-                className='grid size-11 cursor-pointer place-items-center rounded-full text-paper transition-colors hover:bg-paper/15'
+                onClick={() => go(i)}
+                aria-label={`Xem ảnh ${i + 1}: ${slide.title}`}
+                aria-current={i === index}
+                className='group grid h-11 w-6 cursor-pointer place-items-center'
               >
-                <Icon.arrowLeft size={20} />
+                <span
+                  className={cn(
+                    'block h-2 rounded-full transition-all duration-300',
+                    i === index ? 'w-5 bg-brass-light' : 'w-2 bg-paper/50 group-hover:bg-paper'
+                  )}
+                />
               </button>
-              <div className='flex items-center'>
-                {SLIDES.map((slide, i) => (
-                  <button
-                    key={slide.key}
-                    type='button'
-                    onClick={() => go(i)}
-                    aria-label={`Xem ảnh ${i + 1}: ${slide.title}`}
-                    aria-current={i === index}
-                    className='group grid h-11 w-6 cursor-pointer place-items-center'
-                  >
-                    <span
-                      className={cn(
-                        'block h-2 rounded-full transition-all duration-300',
-                        i === index ? 'w-5 bg-brass-light' : 'w-2 bg-paper/50 group-hover:bg-paper'
-                      )}
-                    />
-                  </button>
-                ))}
-              </div>
-              <button
-                type='button'
-                onClick={() => go(index + 1)}
-                aria-label='Ảnh tiếp theo'
-                className='grid size-11 cursor-pointer place-items-center rounded-full text-paper transition-colors hover:bg-paper/15'
-              >
-                <Icon.arrowRight size={20} />
-              </button>
-              <button
-                type='button'
-                onClick={() => setPlaying((value) => !value)}
-                aria-label={playing ? 'Tạm dừng tự chuyển ảnh' : 'Tiếp tục tự chuyển ảnh'}
-                className='ml-1 grid size-11 cursor-pointer place-items-center rounded-full border border-paper/40 text-paper transition-colors hover:bg-paper/15'
-              >
-                {playing ? <Icon.pause size={18} /> : <Icon.play size={18} />}
-              </button>
-            </div>
+            ))}
           </div>
+          <button
+            type='button'
+            onClick={() => go(index + 1)}
+            aria-label='Ảnh tiếp theo'
+            className='grid size-11 cursor-pointer place-items-center rounded-full text-paper transition-colors hover:bg-paper/15'
+          >
+            <Icon.arrowRight size={20} />
+          </button>
+          <button
+            type='button'
+            onClick={() => setPlaying((value) => !value)}
+            aria-label={playing ? 'Tạm dừng tự chuyển ảnh' : 'Tiếp tục tự chuyển ảnh'}
+            className='ml-1 grid size-11 cursor-pointer place-items-center rounded-full border border-paper/40 text-paper transition-colors hover:bg-paper/15'
+          >
+            {playing ? <Icon.pause size={18} /> : <Icon.play size={18} />}
+          </button>
         </div>
       </section>
-      <div className='relative z-10 flex flex-1 flex-col'>{children}</div>
+
+      <div className='relative isolate flex flex-1 flex-col'>
+        <div className='-z-10 absolute inset-0 opacity-70'>
+          <HeroBackdrop />
+        </div>
+        {children}
+      </div>
     </div>
   );
 }

@@ -42,7 +42,7 @@ Mở [http://localhost:3000](http://localhost:3000).
 Toàn bộ nội dung nằm trong một file: [`src/data/locations.ts`](src/data/locations.ts). Số địa điểm, thứ tự "01/05", tiến độ "X/N" và nội dung chứng nhận đều tự tính theo file này.
 
 - **Sửa chữ:** đổi `name`, `label` (nhãn tiêu đề), `subtitle`, `facts` hoặc nội dung trong `sections` (A. Lịch sử, B. Đặc điểm và giá trị di sản, C. Giải pháp bảo tồn và phát huy).
-- **Thêm ảnh thật:** đặt ảnh vào `public/images/`, rồi điền `image: '/images/ten-anh.jpg'` và cập nhật `imageAlt`. Ảnh dùng cho cả carousel trang chủ và trang chi tiết; địa điểm chưa có ảnh sẽ hiện tranh minh họa.
+- **Thêm ảnh thật:** đặt ảnh vào thư mục của địa điểm trong `public/images/` (mỗi địa điểm một thư mục, tên thư mục trùng `id`: `le-quy-don`, `bao-tang-chung-tich`, `dinh-doc-lap`, `cho-ben-thanh`, `lang-ong-ba-chieu`), rồi điền `images: [{ src: '/images/ten-anh.jpg', alt: 'Mô tả ảnh' }, …]`. Ảnh đầu tiên hiện ở carousel trang chủ; trang chi tiết hiện ảnh lớn kèm dải ảnh nhỏ để chọn; địa điểm chưa có ảnh sẽ hiện tranh minh họa.
 - **Thêm địa điểm:** chép một phần tử trong mảng `LOCATIONS`, đổi `id`/`slug` (không dấu, duy nhất), và đặt vị trí ghim trên bản đồ bằng `map: { x, y, labelSide }` (khung 1000 × 700). Nếu chưa có ảnh, thêm tranh minh họa cho `id` mới trong [`landmark-art.tsx`](src/components/journey/landmark-art.tsx), không thì khung ảnh sẽ chỉ có nền.
 - **Giải pháp chung, Kết luận, Thông điệp:** sửa trong `JOURNEY` ở cuối file.
 

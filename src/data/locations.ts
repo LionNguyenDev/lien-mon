@@ -1,7 +1,8 @@
 /**
  * Dữ liệu hành trình. Muốn thêm/bớt/sửa địa điểm chỉ cần chỉnh file này:
  * - Số lượng địa điểm, thứ tự, tiến độ "X/N" đều tự tính theo mảng LOCATIONS.
- * - `image`: đường dẫn ảnh trong /public (vd: '/images/le-quy-don.jpg'). Bỏ trống sẽ hiện ảnh minh họa tạm.
+ * - `images`: ảnh đặt trong /public/images/<id địa điểm>/ (vd: '/images/le-quy-don/cong-truong.jpg'), ảnh đầu tiên là ảnh chính.
+ *   Bỏ trống sẽ hiện ảnh minh họa tạm; `imageAlt` mô tả công trình cho ảnh minh họa đó.
  * - `map`: toạ độ ghim trên bản đồ minh hoạ (khung 1000 x 700), `labelSide` là phía đặt tên địa điểm.
  */
 
@@ -23,7 +24,7 @@ export type JourneyLocation = {
   label: string;
   subtitle: string;
   facts: { label: string; value: string }[];
-  image?: string;
+  images?: { src: string; alt: string }[];
   imageAlt: string;
   map: { x: number; y: number; labelSide: 'left' | 'right' };
   sections: [LocationSection, LocationSection, LocationSection];
@@ -46,6 +47,21 @@ export const LOCATIONS: JourneyLocation[] = [
       { label: 'Khởi công', value: '1874' },
       { label: 'Hoàn thành', value: '1877' },
       { label: 'Mang tên Lê Quý Đôn', value: '1977' },
+    ],
+    images: [
+      {
+        src: '/images/le-quy-don/cong-truong.jpg',
+        alt: 'Cổng chính Trường THPT Lê Quý Đôn mái ngói đỏ, biển tên xanh và cánh cổng sắt màu ngọc giữa hàng cây sứ',
+      },
+      {
+        src: '/images/le-quy-don/mat-tien.jpg',
+        alt: 'Dãy lớp học hai tầng thời Pháp với hành lang lan can trắng và cờ đỏ sao vàng',
+      },
+      { src: '/images/le-quy-don/san-truong.jpg', alt: 'Sân trường rợp bóng cây cổ thụ, bao quanh là các dãy lớp học' },
+      {
+        src: '/images/le-quy-don/toan-canh.jpg',
+        alt: 'Toàn cảnh trường nhìn từ trên cao với các dãy nhà mái ngói đỏ quây quanh sân xanh',
+      },
     ],
     imageAlt: 'Trường THPT Lê Quý Đôn với kiến trúc trường học cổ thời Pháp thuộc',
     map: { x: 330, y: 440, labelSide: 'left' },
@@ -106,6 +122,21 @@ export const LOCATIONS: JourneyLocation[] = [
     label: 'NƠI LƯU GIỮ KÝ ỨC',
     subtitle: 'Những chứng tích lặng im, một thông điệp hòa bình vang xa',
     facts: [{ label: 'Thành lập', value: '4/9/1975' }],
+    images: [
+      {
+        src: '/images/bao-tang-chung-tich/mat-tien.jpg',
+        alt: 'Mặt tiền Bảo tàng Chứng tích Chiến tranh, phía trước trưng bày máy bay quân sự',
+      },
+      {
+        src: '/images/bao-tang-chung-tich/phong-trung-bay.jpg',
+        alt: 'Phòng trưng bày ảnh tư liệu và vũ khí bên trong bảo tàng',
+      },
+      { src: '/images/bao-tang-chung-tich/tu-vu-khi.jpg', alt: 'Du khách xem các tủ kính trưng bày vũ khí thời chiến' },
+      {
+        src: '/images/bao-tang-chung-tich/anh-tu-lieu.jpg',
+        alt: 'Những bức ảnh đen trắng tư liệu về chiến tranh treo trên tường bảo tàng',
+      },
+    ],
     imageAlt: 'Bảo tàng Chứng tích Chiến tranh',
     map: { x: 400, y: 300, labelSide: 'left' },
     sections: [
@@ -170,6 +201,21 @@ export const LOCATIONS: JourneyLocation[] = [
       { label: 'Khánh thành', value: '1966' },
       { label: 'Kiến trúc sư', value: 'Ngô Viết Thụ' },
     ],
+    images: [
+      { src: '/images/dinh-doc-lap/mat-tien.jpg', alt: 'Mặt tiền Dinh Độc Lập với đài phun nước và bãi cỏ phía trước' },
+      {
+        src: '/images/dinh-doc-lap/san-co.jpg',
+        alt: 'Du khách tham quan sân cỏ trước Dinh Độc Lập, mặt tiền rèm hoa đá và hàng cờ đỏ',
+      },
+      {
+        src: '/images/dinh-doc-lap/toan-canh.jpg',
+        alt: 'Toàn cảnh Dinh Độc Lập giữa mảng cây xanh, phía sau là thành phố',
+      },
+      {
+        src: '/images/dinh-doc-lap/cuu-chien-binh.jpg',
+        alt: 'Đoàn cựu chiến binh chụp ảnh lưu niệm trước Dinh Độc Lập',
+      },
+    ],
     imageAlt: 'Dinh Độc Lập với mặt tiền kiến trúc hiện đại',
     map: { x: 545, y: 400, labelSide: 'right' },
     sections: [
@@ -230,6 +276,18 @@ export const LOCATIONS: JourneyLocation[] = [
     label: 'NHỊP SỐNG THƯƠNG CẢNG',
     subtitle: 'Tháp đồng hồ và hơn một thế kỷ nhịp sống buôn bán của Sài Gòn',
     facts: [{ label: 'Khánh thành', value: '1914' }],
+    images: [
+      {
+        src: '/images/cho-ben-thanh/cong-chinh.jpg',
+        alt: 'Cổng chính Chợ Bến Thành với tháp đồng hồ, du khách tham quan phía trước',
+      },
+      {
+        src: '/images/cho-ben-thanh/thap-dong-ho.jpg',
+        alt: 'Tháp đồng hồ Chợ Bến Thành sơn vàng, hai bên là cờ đỏ sao vàng',
+      },
+      { src: '/images/cho-ben-thanh/hoang-hon.jpg', alt: 'Chợ Bến Thành trong ánh hoàng hôn' },
+      { src: '/images/cho-ben-thanh/ben-trong.jpg', alt: 'Lối đi bên trong chợ với các sạp hàng và khách mua sắm' },
+    ],
     imageAlt: 'Cổng chính Chợ Bến Thành với tháp đồng hồ',
     map: { x: 630, y: 570, labelSide: 'right' },
     sections: [
@@ -293,6 +351,18 @@ export const LOCATIONS: JourneyLocation[] = [
     facts: [
       { label: 'Thờ phụng', value: 'Tả quân Lê Văn Duyệt' },
       { label: 'Ông mất năm', value: '1832' },
+    ],
+    images: [
+      {
+        src: '/images/lang-ong-ba-chieu/cong-tam-quan.jpg',
+        alt: 'Cổng tam quan Lăng Ông Bà Chiểu sơn vàng, mái cong nhiều tầng',
+      },
+      { src: '/images/lang-ong-ba-chieu/chanh-dien.jpg', alt: 'Mái ngói và hoành phi chữ Hán ở chánh điện Lăng Ông' },
+      {
+        src: '/images/lang-ong-ba-chieu/ban-tho.jpg',
+        alt: 'Bàn thờ bên trong Lăng Ông trang trí sơn son thếp vàng',
+      },
+      { src: '/images/lang-ong-ba-chieu/toan-canh.jpg', alt: 'Toàn cảnh khuôn viên Lăng Ông nhìn từ trên cao' },
     ],
     imageAlt: 'Cổng tam quan Lăng Ông Bà Chiểu',
     map: { x: 680, y: 140, labelSide: 'right' },

@@ -42,6 +42,10 @@ const config: Config = {
         },
         'draw-route': { from: { strokeDashoffset: '1' }, to: { strokeDashoffset: '0' } },
         'ken-burns': { from: { transform: 'scale(1)' }, to: { transform: 'scale(1.08)' } },
+        'postcard-in': {
+          from: { opacity: '0', translate: '0 18px', scale: '0.96' },
+          to: { opacity: '1', translate: '0 0', scale: '1' },
+        },
       },
       animation: {
         'fade-up': 'fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both',
@@ -49,6 +53,7 @@ const config: Config = {
         'pin-drop': 'pin-drop 500ms cubic-bezier(0.22, 1, 0.36, 1) both',
         'pulse-ring': 'pulse-ring 1.8s ease-out infinite',
         'ken-burns': 'ken-burns 7s ease-out both',
+        'postcard-in': 'postcard-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
   },
