@@ -30,9 +30,9 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {toast && (
           <div
             key={toast.id}
-            className='pointer-events-auto flex max-w-md animate-fade-up items-center gap-3 rounded-2xl border border-brass/50 bg-navy px-4 py-3 text-paper-light shadow-lift'
+            className='pointer-events-auto flex max-w-md animate-fade-up items-center gap-3 rounded-2xl border border-azure/50 bg-navy px-4 py-3 text-paper-light shadow-lift'
           >
-            <span className='grid size-8 shrink-0 place-items-center rounded-full bg-brass text-navy-deep'>
+            <span className='grid size-8 shrink-0 place-items-center rounded-full bg-pastel text-navy-deep'>
               <Icon.check size={18} strokeWidth={3} />
             </span>
             <p className='font-medium text-sm'>{toast.message}</p>

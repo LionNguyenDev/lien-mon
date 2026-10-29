@@ -72,7 +72,7 @@ export const LOCATIONS: JourneyLocation[] = [
         content: [
           {
             type: 'paragraph',
-            text: 'Trường được xây dựng từ năm 1874, hoàn thành năm 1877. Trải qua nhiều lần đổi tên, trường chính thức mang tên THPT Lê Quý Đôn vào năm 1977.',
+            text: 'Trường được xây dựng từ năm 1874 và hoàn thành năm 1877, là một trong những ngôi trường lâu đời nhất tại TP.HCM. Trải qua nhiều lần đổi tên gắn với những giai đoạn lịch sử khác nhau, đến năm 1977, trường chính thức mang tên THPT Lê Quý Đôn.',
           },
         ],
       },
@@ -120,7 +120,7 @@ export const LOCATIONS: JourneyLocation[] = [
     slug: 'bao-tang-chung-tich-chien-tranh',
     name: 'Bảo tàng Chứng tích Chiến tranh',
     label: 'NƠI LƯU GIỮ KÝ ỨC',
-    subtitle: 'Những chứng tích lặng im, một thông điệp hòa bình vang xa',
+    subtitle: 'Những di sản lưu giữ dấu ấn thời gian, kết nối quá khứ với hiện tại và tương lai',
     facts: [{ label: 'Thành lập', value: '4/9/1975' }],
     images: [
       {
@@ -146,7 +146,7 @@ export const LOCATIONS: JourneyLocation[] = [
         content: [
           {
             type: 'paragraph',
-            text: 'Bảo tàng được thành lập ngày 4/9/1975, nhằm lưu giữ và trưng bày tư liệu, hình ảnh, hiện vật về chiến tranh Việt Nam.',
+            text: 'Bảo tàng thành lập ngày 4/9/1975 với tên gọi ban đầu là Nhà trưng bày tội ác Mỹ - Ngụy. Đến ngày 4/7/1995, bảo tàng chính thức mang tên Bảo tàng Chứng tích Chiến tranh, lưu giữ những tư liệu quý giá về chiến tranh Việt Nam.',
           },
         ],
       },
@@ -423,8 +423,8 @@ export const TOTAL_LOCATIONS = LOCATIONS.length;
 
 export const JOURNEY = {
   title: 'HÀNH TRÌNH KHÁM PHÁ',
-  subtitle: 'Khám phá những câu chuyện và giá trị di sản của TP.HCM',
-  project: 'Lịch sử, giá trị và giải pháp bảo tồn, phát huy di sản tại TP.HCM',
+  subtitle: 'Theo bước chân lịch sử, kết nối những miền di sản qua hành trình số',
+  project: 'Dự án liên môn 50:01 - Khắc Dấu Rạng Đông',
   generalSolutions: [
     {
       title: 'Bảo tồn',

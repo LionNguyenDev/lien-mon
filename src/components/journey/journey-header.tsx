@@ -23,7 +23,7 @@ export function ProgressMeter({ className }: { className?: string }) {
           </strong>{' '}
           địa điểm
         </span>
-        <span className='font-semibold text-brass-dark text-xs tabular-nums'>{percent}%</span>
+        <span className='font-semibold text-azure-dark text-xs tabular-nums'>{percent}%</span>
       </p>
       <div
         role='progressbar'
@@ -34,7 +34,7 @@ export function ProgressMeter({ className }: { className?: string }) {
         className='mt-1.5 h-2.5 overflow-hidden rounded-full bg-paper-dark ring-1 ring-paper-edge'
       >
         <div
-          className='h-full rounded-full bg-gradient-to-r from-brass to-brick transition-[width] duration-500 ease-out'
+          className='h-full rounded-full bg-gradient-to-r from-azure to-azure-dark transition-[width] duration-500 ease-out'
           style={{ width: `${percent}%` }}
         />
       </div>
@@ -49,8 +49,8 @@ export function ResetButton() {
 
   if (confirming) {
     return (
-      <div className='flex items-center gap-1 rounded-xl border border-brick/40 bg-white/70 p-1' role='group'>
-        <span className='px-2 font-medium text-brick-dark text-xs'>Xóa toàn bộ tiến độ?</span>
+      <div className='flex items-center gap-1 rounded-xl border border-azure/40 bg-white/70 p-1' role='group'>
+        <span className='px-2 font-medium text-azure-deep text-xs'>Xóa toàn bộ tiến độ?</span>
         <button
           type='button'
           className={buttonClass('primary', 'sm', 'px-3 normal-case tracking-normal')}
@@ -94,12 +94,14 @@ export function JourneyHeader({ showReset = false }: { showReset?: boolean }) {
           href={ROUTES.HOME}
           className='flex min-h-11 cursor-pointer items-center gap-2 rounded-lg font-bold font-display text-navy'
         >
-          <span className='grid size-9 place-items-center rounded-full bg-navy text-brass-light'>
-            <Icon.compass size={20} />
-          </span>
+          <img
+            src='/images/logo.jpg'
+            alt=''
+            className='size-10 rounded-lg object-cover shadow-card ring-1 ring-navy/10'
+          />
           <span className='leading-tight'>
             Hành trình
-            <span className='block font-sans font-semibold text-[10px] text-brick uppercase tracking-[0.2em]'>
+            <span className='block font-sans font-semibold text-[10px] text-azure-dark uppercase tracking-[0.2em]'>
               khám phá TP.HCM
             </span>
           </span>

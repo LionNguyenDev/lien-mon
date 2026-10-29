@@ -25,12 +25,12 @@ function SectionContent({ blocks }: { blocks: ContentBlock[] }) {
         ) : (
           <div key={i}>
             {block.heading && (
-              <h4 className='mb-2 font-bold text-brick text-xs uppercase tracking-[0.16em]'>{block.heading}</h4>
+              <h4 className='mb-2 font-bold text-azure-dark text-xs uppercase tracking-[0.16em]'>{block.heading}</h4>
             )}
             <ul className='space-y-2'>
               {block.items.map((item) => (
                 <li key={item} className='flex gap-3 text-[15px] text-navy/90 leading-relaxed sm:text-base'>
-                  <span className='mt-2.5 size-1.5 shrink-0 rotate-45 bg-brass' aria-hidden='true' />
+                  <span className='mt-2.5 size-1.5 shrink-0 rotate-45 bg-azure' aria-hidden='true' />
                   {item}
                 </li>
               ))}
@@ -59,7 +59,7 @@ function AccordionItem({
     <div
       className={cn(
         'overflow-hidden rounded-2xl border bg-paper-light/90 shadow-card transition-colors',
-        open ? 'border-brass' : 'border-paper-edge'
+        open ? 'border-azure' : 'border-paper-edge'
       )}
     >
       <h3>
@@ -83,13 +83,13 @@ function AccordionItem({
             {section.title}
           </span>
           {seen && (
-            <span className='hidden items-center gap-1 rounded-full bg-brass/20 px-2 py-0.5 font-semibold text-[11px] text-brass-dark sm:flex'>
+            <span className='hidden items-center gap-1 rounded-full bg-pastel px-2 py-0.5 font-semibold text-[11px] text-navy ring-1 ring-pastel-dark sm:flex'>
               <Icon.check size={12} strokeWidth={3} /> Đã xem
             </span>
           )}
           <Icon.chevronDown
             size={22}
-            className={cn('shrink-0 text-brick transition-transform duration-300', open && 'rotate-180')}
+            className={cn('shrink-0 text-azure-dark transition-transform duration-300', open && 'rotate-180')}
           />
         </button>
       </h3>
@@ -175,7 +175,7 @@ export default function LocationDetail({ index }: { index: number }) {
               </span>
               <span className='h-px flex-1 bg-gradient-to-r from-brass/70 to-transparent' />
             </div>
-            <p className='mt-4 inline-flex rounded-full bg-brick px-3 py-1 font-bold text-white text-xs uppercase tracking-[0.2em]'>
+            <p className='mt-4 inline-flex rounded-full bg-azure-dark px-3 py-1 font-bold text-white text-xs uppercase tracking-[0.2em]'>
               {location.label}
             </p>
             <h1 className='mt-3 font-display font-extrabold text-4xl text-navy leading-[1.08] sm:text-5xl lg:text-6xl'>
@@ -193,7 +193,7 @@ export default function LocationDetail({ index }: { index: number }) {
             </dl>
 
             {explored && (
-              <p className='mt-5 inline-flex items-center gap-2 rounded-full bg-brass/20 px-3 py-1.5 font-semibold text-brass-dark text-sm'>
+              <p className='mt-5 inline-flex items-center gap-2 rounded-full bg-pastel px-3 py-1.5 font-semibold text-navy text-sm ring-1 ring-pastel-dark'>
                 <Icon.check size={16} strokeWidth={3} /> Bạn đã khám phá địa điểm này
               </p>
             )}
@@ -276,7 +276,7 @@ export default function LocationDetail({ index }: { index: number }) {
           </div>
 
           <div className='flex flex-col gap-3'>
-            <p className='font-semibold text-brick text-xs uppercase tracking-[0.25em]'>Chặng tiếp theo</p>
+            <p className='font-semibold text-azure-dark text-xs uppercase tracking-[0.25em]'>Chặng tiếp theo</p>
             <p className='font-bold font-display text-2xl text-navy leading-snug'>
               {nextLocation ? nextLocation.name : 'Bạn đã tới điểm dừng cuối cùng'}
             </p>
@@ -295,8 +295,8 @@ export default function LocationDetail({ index }: { index: number }) {
             </Link>
 
             {isLast && showMissing && missing.length > 0 && (
-              <div role='alert' className='mt-2 animate-fade-up rounded-2xl border-2 border-brick/50 bg-white/80 p-4'>
-                <p className='flex items-center gap-2 font-bold text-brick-dark'>
+              <div role='alert' className='mt-2 animate-fade-up rounded-2xl border-2 border-azure/50 bg-white/80 p-4'>
+                <p className='flex items-center gap-2 font-bold text-azure-deep'>
                   <Icon.alert size={20} /> Bạn còn {missing.length} địa điểm chưa khám phá
                 </p>
                 <ul className='mt-2 space-y-1'>

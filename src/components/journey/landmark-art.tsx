@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-const DARK = '#0B1729';
-const DEEP = '#081221';
+const DARK = '#07213F';
+const DEEP = '#051730';
 const LIGHT = '#E2BE7A';
 
 /** Mái cong kiểu đình chùa: `y` là mép dưới, đầu mái hơi vểnh lên. */
@@ -22,7 +22,7 @@ const LANDMARKS: Record<string, ReactNode> = {
       <path d='M380 820V640h680v180Z M370 640l20-26h660l20 26Z' fill={DARK} />
       <path d='M630 820V560h180v260Z M610 560l110-74 110 74Z' fill={DARK} />
       <path d='M720 486v-60' stroke={DARK} strokeWidth='4' />
-      <path d='M722 428h34v20h-34Z' fill='#B5432F' />
+      <path d='M722 428h34v20h-34Z' fill='#5088C0' />
       <circle cx='720' cy='600' r='16' fill={LIGHT} fillOpacity='0.6' />
       <g fill={LIGHT} fillOpacity='0.45'>
         {windows(410, 662, 5, 42)}
@@ -65,7 +65,7 @@ const LANDMARKS: Record<string, ReactNode> = {
       <path d='M360 820v-56h720v56Z' fill={DARK} />
       <path d='M430 764V610h580v154Z M410 610v-18h620v18Z M600 592v-44h240v44Z M590 548v-10h260v10Z' fill={DARK} />
       <path d='M720 538V420' stroke={DARK} strokeWidth='5' />
-      <path d='M723 422h52v34h-52Z' fill='#B5432F' />
+      <path d='M723 422h52v34h-52Z' fill='#5088C0' />
       <g fill={LIGHT} fillOpacity='0.32'>
         {Array.from({ length: 40 }, (_, i) => (
           <rect key={i} x={442 + i * 14} y='622' width='6' height='130' />
@@ -142,12 +142,12 @@ export function LandmarkArt({ id, className }: { id: string; className?: string 
     >
       <defs>
         <linearGradient id={`sky-${id}`} x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='0' stopColor='#0E1D31' />
-          <stop offset='0.65' stopColor='#1F3A5F' />
-          <stop offset='1' stopColor='#2E5383' />
+          <stop offset='0' stopColor='#061A35' />
+          <stop offset='0.65' stopColor='#0B3263' />
+          <stop offset='1' stopColor='#1D4C86' />
         </linearGradient>
         <pattern id={`grid-${id}`} width='60' height='60' patternUnits='userSpaceOnUse'>
-          <path d='M60 0H0V60' fill='none' stroke='#F5EBD7' strokeOpacity='0.05' />
+          <path d='M60 0H0V60' fill='none' stroke='#F5F9FD' strokeOpacity='0.05' />
         </pattern>
       </defs>
       <rect width='1440' height='900' fill={`url(#sky-${id})`} />
@@ -155,13 +155,13 @@ export function LandmarkArt({ id, className }: { id: string; className?: string 
       <circle cx='1010' cy='600' r='54' fill={LIGHT} fillOpacity='0.22' />
       <path
         d='M0 700 C200 650 360 690 520 660 S860 640 1040 670 S1300 650 1440 680 V900 H0Z'
-        fill='#132945'
+        fill='#0A2B55'
         fillOpacity='0.8'
       />
       <path
         d='M120 520 Q400 420 560 560 T1000 500'
         fill='none'
-        stroke='#D4664F'
+        stroke='#7FA9D6'
         strokeOpacity='0.35'
         strokeWidth='3'
         strokeDasharray='2 12'

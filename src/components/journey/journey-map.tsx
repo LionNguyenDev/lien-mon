@@ -28,8 +28,8 @@ function MapPin({
   const href = locationPath(location.slug);
   const status = explored ? 'đã khám phá' : 'chưa khám phá';
   const roleText = role === 'current' ? 'Vị trí hiện tại' : role === 'next' ? 'Điểm tiếp theo' : null;
-  const fill = role === 'current' ? '#1F3A5F' : explored ? '#B5432F' : '#FBF5E9';
-  const numberColor = role === 'current' || explored ? '#FBF5E9' : '#1F3A5F';
+  const fill = role === 'current' ? '#0B3263' : explored ? '#5088C0' : '#FFFFFF';
+  const numberColor = role === 'current' || explored ? '#FFFFFF' : '#0B3263';
   // Bản đồ thu nhỏ hẹp hơn nhiều: đặt nhãn về phía giữa bản đồ để không bị cắt ở mép.
   const left = compact ? location.map.x > 500 : location.map.labelSide === 'left';
 
@@ -55,13 +55,13 @@ function MapPin({
       >
         <svg
           viewBox='0 0 40 52'
-          className='group-hover:-translate-y-1 h-[52px] w-10 drop-shadow-[0_6px_6px_rgba(14,29,49,0.35)] transition-transform duration-200'
+          className='group-hover:-translate-y-1 h-[52px] w-10 drop-shadow-[0_6px_6px_rgba(6,26,53,0.35)] transition-transform duration-200'
           aria-hidden='true'
         >
           <path
             d='M20 51C20 51 3 31.5 3 19.5a17 17 0 0 1 34 0C37 31.5 20 51 20 51Z'
             fill={fill}
-            stroke={role === 'next' ? '#C8963E' : '#1F3A5F'}
+            stroke={role === 'next' ? '#C8963E' : '#0B3263'}
             strokeWidth={role === 'next' ? 3.5 : 2}
           />
           <circle cx='20' cy='19.5' r='11.5' fill='none' stroke={numberColor} strokeOpacity='0.35' />
@@ -78,7 +78,7 @@ function MapPin({
           </text>
         </svg>
         {explored && (
-          <span className='-right-1.5 absolute top-0 grid size-5 place-items-center rounded-full border-2 border-paper-light bg-brass text-navy-deep shadow-pin'>
+          <span className='-right-1.5 absolute top-0 grid size-5 place-items-center rounded-full border-2 border-paper-light bg-pastel text-navy-deep shadow-pin'>
             <Icon.check size={11} strokeWidth={4} />
           </span>
         )}
@@ -89,7 +89,7 @@ function MapPin({
           href={href}
           tabIndex={-1}
           className={cn(
-            '-translate-y-1/2 absolute top-[-34px] z-0 flex cursor-pointer flex-col rounded-lg border bg-paper-light/95 px-2.5 py-1 shadow-card transition-colors hover:border-brick hover:bg-white',
+            '-translate-y-1/2 absolute top-[-34px] z-0 flex cursor-pointer flex-col rounded-lg border bg-paper-light/95 px-2.5 py-1 shadow-card transition-colors hover:border-azure hover:bg-white',
             left ? 'right-6 items-end text-right' : 'left-6 items-start',
             compact ? 'hidden w-max max-w-[9rem] leading-tight sm:flex' : 'whitespace-nowrap',
             role === 'current' ? 'border-navy' : role === 'next' ? 'border-brass' : 'border-paper-edge'
@@ -107,7 +107,7 @@ function MapPin({
           )}
           <span className={cn('font-semibold text-navy', compact ? 'text-xs' : 'text-[13px]')}>{location.name}</span>
           {!compact && (
-            <span className='flex items-center gap-1 font-semibold text-[10px] text-brick uppercase tracking-[0.12em]'>
+            <span className='flex items-center gap-1 font-semibold text-[10px] text-azure-dark uppercase tracking-[0.12em]'>
               Chi tiết <Icon.arrowRight size={11} strokeWidth={3} />
             </span>
           )}

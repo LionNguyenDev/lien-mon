@@ -20,7 +20,7 @@ export default function MapPage() {
       <main className='mx-auto max-w-6xl px-4 pt-6 pb-16 sm:px-6 sm:pt-10'>
         <div className='flex animate-fade-up flex-col gap-2 sm:flex-row sm:items-end sm:justify-between'>
           <div>
-            <p className='font-semibold text-brick text-xs uppercase tracking-[0.25em]'>Bản đồ hành trình</p>
+            <p className='font-semibold text-azure-dark text-xs uppercase tracking-[0.25em]'>Bản đồ hành trình</p>
             <h1 className='mt-1 font-bold font-display text-3xl text-navy sm:text-4xl'>Sài Gòn – Gia Định</h1>
           </div>
           <p className='max-w-sm text-muted text-sm'>
@@ -54,10 +54,10 @@ export default function MapPage() {
               <span className='size-3.5 rounded-full border-2 border-navy bg-paper-light' /> Chưa khám phá
             </li>
             <li className='flex items-center gap-2'>
-              <span className='size-3.5 rounded-full bg-brick' /> Đã khám phá
+              <span className='size-3.5 rounded-full bg-azure-dark' /> Đã khám phá
             </li>
             <li className='flex items-center gap-2'>
-              <span className='h-0 w-8 border-brick border-t-[3px] border-dotted' /> Lộ trình gợi ý
+              <span className='h-0 w-8 border-azure border-t-[3px] border-dotted' /> Lộ trình gợi ý
             </li>
           </ul>
         </section>
@@ -79,17 +79,17 @@ export default function MapPage() {
                     <span
                       className={cn(
                         'grid size-11 shrink-0 place-items-center rounded-full font-bold font-display text-lg',
-                        explored ? 'bg-brick text-white' : 'border-2 border-navy text-navy'
+                        explored ? 'bg-azure-dark text-white' : 'border-2 border-navy text-navy'
                       )}
                     >
                       {explored ? <Icon.check size={20} strokeWidth={3} /> : index + 1}
                     </span>
                     <div className='min-w-0'>
-                      <p className='font-semibold text-[11px] text-brick uppercase tracking-[0.16em]'>
+                      <p className='font-semibold text-[11px] text-azure-dark uppercase tracking-[0.16em]'>
                         {location.label}
                       </p>
                       <h3 className='font-bold font-display text-lg text-navy leading-snug'>{location.name}</h3>
-                      <p className={cn('mt-0.5 text-xs', explored ? 'text-brick-dark' : 'text-muted')}>
+                      <p className={cn('mt-0.5 text-xs', explored ? 'text-azure-deep' : 'text-muted')}>
                         {explored ? 'Đã khám phá' : 'Chưa khám phá'}
                       </p>
                     </div>

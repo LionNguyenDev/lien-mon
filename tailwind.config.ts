@@ -11,20 +11,23 @@ const config: Config = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        paper: { DEFAULT: '#F5EBD7', light: '#FBF5E9', dark: '#EADBBE', edge: '#DCC8A2' },
-        navy: { DEFAULT: '#1F3A5F', dark: '#142740', deep: '#0E1D31', light: '#2E5383' },
-        brick: { DEFAULT: '#B5432F', dark: '#93341F', light: '#D4664F' },
+        paper: { DEFAULT: '#F5F9FD', light: '#FFFFFF', dark: '#E4EEF8', edge: '#C9DAEC' },
+        navy: { DEFAULT: '#0B3263', dark: '#08264C', deep: '#061A35', light: '#1D4C86' },
+        // Xanh dương sáng #5088C0 chỉ đạt 3.7:1 trên nền trắng, chữ nhỏ và nút dùng bản dark/deep cho dễ đọc
+        azure: { DEFAULT: '#5088C0', dark: '#2F6499', deep: '#244F7D', light: '#7FA9D6' },
+        pastel: { DEFAULT: '#E8F8B0', dark: '#CFE88A' },
+        // Vàng đồng chỉ làm điểm nhấn nhỏ (~10% tổng thể)
         brass: { DEFAULT: '#C8963E', dark: '#8A6420', light: '#E2BE7A' },
-        muted: '#4F5D70',
+        muted: '#4A5A70',
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],
         sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        card: '0 1px 0 rgba(31, 58, 95, 0.06), 0 14px 30px -16px rgba(31, 58, 95, 0.35)',
-        lift: '0 2px 0 rgba(31, 58, 95, 0.08), 0 22px 40px -18px rgba(31, 58, 95, 0.45)',
-        pin: '0 6px 12px -4px rgba(14, 29, 49, 0.45)',
+        card: '0 1px 0 rgba(11, 50, 99, 0.06), 0 14px 30px -16px rgba(11, 50, 99, 0.35)',
+        lift: '0 2px 0 rgba(11, 50, 99, 0.08), 0 22px 40px -18px rgba(11, 50, 99, 0.45)',
+        pin: '0 6px 12px -4px rgba(6, 26, 53, 0.45)',
       },
       keyframes: {
         'fade-up': {

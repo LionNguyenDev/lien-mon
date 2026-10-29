@@ -102,7 +102,7 @@ export function LocationImage({
                 aria-pressed={i === selected}
                 className={cn(
                   'block aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-lg ring-2 transition',
-                  i === selected ? 'ring-brass' : 'opacity-70 ring-transparent hover:opacity-100'
+                  i === selected ? 'ring-azure' : 'opacity-70 ring-transparent hover:opacity-100'
                 )}
               >
                 <img src={image.src} alt='' className='h-full w-full object-cover' />

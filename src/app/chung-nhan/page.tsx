@@ -104,11 +104,11 @@ export default function CertificatePage() {
 
       <main className='mx-auto max-w-5xl px-4 pt-8 pb-16 sm:px-6 sm:pt-12'>
         <div className='animate-fade-up text-center'>
-          <p className='inline-flex items-center gap-2 font-semibold text-brick text-xs uppercase tracking-[0.3em]'>
+          <p className='inline-flex items-center gap-2 font-semibold text-azure-dark text-xs uppercase tracking-[0.3em]'>
             <Icon.award size={18} /> Chứng nhận hoàn thành
           </p>
           <h1 className='mt-2 font-display font-extrabold text-5xl text-navy sm:text-6xl'>CHÚC MỪNG BẠN!</h1>
-          <p className='mt-3 font-bold font-display text-brick text-lg sm:text-2xl'>
+          <p className='mt-3 font-bold font-display text-azure-dark text-lg sm:text-2xl'>
             ĐÃ HOÀN THÀNH HÀNH TRÌNH KHÁM PHÁ TP.HCM
           </p>
         </div>
@@ -133,7 +133,7 @@ export default function CertificatePage() {
             maxLength={40}
             autoComplete='name'
             placeholder='Ví dụ: Nguyễn Văn An'
-            className='mt-1.5 block min-h-12 w-full rounded-xl border-2 border-paper-edge bg-white px-4 text-base text-navy shadow-inner outline-none transition-colors placeholder:text-muted/60 read-only:cursor-not-allowed read-only:bg-paper-light read-only:text-muted focus:border-brass'
+            className='mt-1.5 block min-h-12 w-full rounded-xl border-2 border-paper-edge bg-white px-4 text-base text-navy shadow-inner outline-none transition-colors placeholder:text-muted/60 read-only:cursor-not-allowed read-only:bg-paper-light read-only:text-muted focus:border-azure'
           />
           <p id='cert-name-hint' className='mt-1.5 text-muted text-xs'>
             Tên hiển thị ngay trên chứng nhận bên dưới. Mỗi hành trình chỉ được nhập tên và tải chứng nhận một lần.
@@ -170,10 +170,10 @@ export default function CertificatePage() {
             role='alertdialog'
             aria-labelledby='confirm-title'
             aria-describedby='confirm-desc'
-            className='mx-auto mt-8 max-w-xl animate-fade-up rounded-2xl border-2 border-brass bg-white/80 p-5 shadow-card'
+            className='mx-auto mt-8 max-w-xl animate-fade-up rounded-2xl border-2 border-azure bg-white/80 p-5 shadow-card'
           >
             <p id='confirm-title' className='flex items-center gap-2 font-bold text-navy'>
-              <Icon.alert size={20} className='text-brick' /> Xác nhận tên trên chứng nhận
+              <Icon.alert size={20} className='text-azure-dark' /> Xác nhận tên trên chứng nhận
             </p>
             <p id='confirm-desc' className='mt-2 text-muted text-sm leading-relaxed'>
               Chứng nhận sẽ được cấp cho <strong className='text-navy'>{trimmedName}</strong>. Sau khi tải, bạn không
@@ -207,7 +207,7 @@ export default function CertificatePage() {
             </p>
           </blockquote>
           <p className='mx-auto mt-6 max-w-3xl text-center text-muted leading-relaxed'>{JOURNEY.conclusion}</p>
-          <h2 className='mt-10 text-center font-bold text-brick text-xs uppercase tracking-[0.25em]'>
+          <h2 className='mt-10 text-center font-bold text-azure-dark text-xs uppercase tracking-[0.25em]'>
             Giải pháp chung
           </h2>
           <dl className='mt-4 grid gap-4 sm:grid-cols-2'>

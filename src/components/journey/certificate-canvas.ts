@@ -3,11 +3,11 @@ import { LOCATIONS } from '@/data/locations';
 export const CERT_WIDTH = 2000;
 export const CERT_HEIGHT = 1414;
 
-const NAVY = '#1F3A5F';
-const BRICK = '#B5432F';
+const NAVY = '#0B3263';
+const AZURE = '#2F6499';
 const BRASS = '#C8963E';
 const BRASS_DARK = '#8A6420';
-const PAPER = '#FBF5E9';
+const PAPER = '#FFFFFF';
 
 type Fonts = { display: string; body: string };
 
@@ -108,7 +108,7 @@ function drawMapMotif(ctx: CanvasRenderingContext2D) {
 
   // Lộ trình chấm đỏ
   ctx.globalAlpha = 0.16;
-  ctx.strokeStyle = BRICK;
+  ctx.strokeStyle = AZURE;
   ctx.lineWidth = 6;
   ctx.setLineDash([3, 22]);
   ctx.beginPath();
@@ -186,7 +186,7 @@ function drawBorder(ctx: CanvasRenderingContext2D) {
     ctx.strokeStyle = BRASS_DARK;
     ctx.lineWidth = 3;
     ctx.stroke();
-    ctx.fillStyle = BRICK;
+    ctx.fillStyle = AZURE;
     for (let i = 0; i < 4; i++) {
       const a = (Math.PI / 2) * i + Math.PI / 4;
       diamond(ctx, cx + Math.cos(a) * 18, cy + Math.sin(a) * 18, 9);
@@ -208,7 +208,7 @@ function drawDivider(ctx: CanvasRenderingContext2D, y: number, half: number) {
   ctx.moveTo(cx + 26, y);
   ctx.lineTo(cx + half, y);
   ctx.stroke();
-  ctx.fillStyle = BRICK;
+  ctx.fillStyle = AZURE;
   diamond(ctx, cx, y, 12);
   ctx.fillStyle = BRASS;
   diamond(ctx, cx - half - 12, y, 6);
@@ -222,8 +222,8 @@ function drawStamp(ctx: CanvasRenderingContext2D, fonts: Fonts, x: number, y: nu
   ctx.translate(x, y);
   ctx.rotate(-0.2);
   ctx.globalAlpha = 0.88;
-  ctx.strokeStyle = BRICK;
-  ctx.fillStyle = BRICK;
+  ctx.strokeStyle = AZURE;
+  ctx.fillStyle = AZURE;
 
   ctx.lineWidth = 9;
   ctx.beginPath();
@@ -277,7 +277,7 @@ export function drawCertificate(
 
   const bg = ctx.createRadialGradient(cx, CERT_HEIGHT / 2, 200, cx, CERT_HEIGHT / 2, 1250);
   bg.addColorStop(0, PAPER);
-  bg.addColorStop(1, '#EEDDBB');
+  bg.addColorStop(1, '#E1ECF7');
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, CERT_WIDTH, CERT_HEIGHT);
 
@@ -287,7 +287,7 @@ export function drawCertificate(
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
 
-  ctx.fillStyle = BRICK;
+  ctx.fillStyle = AZURE;
   ctx.font = `600 30px ${fonts.body}`;
   spacedText(ctx, 'HÀNH TRÌNH KHÁM PHÁ TP. HỒ CHÍ MINH', cx, 235, 9);
 
@@ -296,7 +296,7 @@ export function drawCertificate(
   ctx.fillText('GIẤY CHỨNG NHẬN', cx, 380);
   drawDivider(ctx, 435, 300);
 
-  ctx.fillStyle = '#4F5D70';
+  ctx.fillStyle = '#4A5A70';
   ctx.font = `400 38px ${fonts.body}`;
   ctx.fillText('Trân trọng ghi nhận', cx, 530);
 
@@ -307,7 +307,7 @@ export function drawCertificate(
     size -= 4;
     ctx.font = `italic 700 ${size}px ${fonts.display}`;
   }
-  ctx.fillStyle = BRICK;
+  ctx.fillStyle = AZURE;
   ctx.globalAlpha = name.trim() ? 1 : 0.3;
   ctx.fillText(displayName, cx, 680);
   ctx.globalAlpha = 1;
@@ -323,7 +323,7 @@ export function drawCertificate(
   ctx.font = `700 54px ${fonts.display}`;
   ctx.fillText('ĐÃ HOÀN THÀNH HÀNH TRÌNH KHÁM PHÁ TP.HCM', cx, 820);
 
-  ctx.fillStyle = '#4F5D70';
+  ctx.fillStyle = '#4A5A70';
   ctx.font = `400 32px ${fonts.body}`;
   const places = `qua ${LOCATIONS.length} điểm di sản: ${LOCATIONS.map((l) => l.name).join(' · ')}`;
   wrapLines(ctx, places, 1450).forEach((line, i) => ctx.fillText(line, cx, 890 + i * 46));

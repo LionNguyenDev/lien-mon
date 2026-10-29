@@ -3,8 +3,8 @@ import { LOCATIONS } from '@/data/locations';
 export const MAP_WIDTH = 1000;
 export const MAP_HEIGHT = 700;
 
-const WATER = '#9FB6C9';
-const WATER_LIGHT = '#B9CCDA';
+const WATER = '#8DB3DA';
+const WATER_LIGHT = '#B3CDE8';
 
 /** Đường nét đứt nối các địa điểm theo thứ tự, uốn nhẹ cho cảm giác bản đồ vẽ tay. */
 function routePath() {
@@ -27,15 +27,15 @@ function CompassRose({ x, y, r }: { x: number; y: number; r: number }) {
     <g transform={`translate(${x} ${y})`} opacity={0.75}>
       <circle r={r} fill='none' stroke='#8A6420' strokeWidth={1.5} />
       <circle r={r * 0.78} fill='none' stroke='#8A6420' strokeWidth={0.75} strokeDasharray='2 4' />
-      <path d={`M0 ${-r * 1.15} L${r * 0.16} 0 L0 ${r * 1.15} L${-r * 0.16} 0 Z`} fill='#1F3A5F' />
+      <path d={`M0 ${-r * 1.15} L${r * 0.16} 0 L0 ${r * 1.15} L${-r * 0.16} 0 Z`} fill='#0B3263' />
       <path d={`M${-r * 1.15} 0 L0 ${r * 0.16} L${r * 1.15} 0 L0 ${-r * 0.16} Z`} fill='#C8963E' />
-      <path d={`M0 ${-r * 1.15} L${r * 0.16} 0 L0 0 Z`} fill='#B5432F' />
+      <path d={`M0 ${-r * 1.15} L${r * 0.16} 0 L0 0 Z`} fill='#5088C0' />
       <text
         y={-r * 1.32}
         textAnchor='middle'
         fontSize={r * 0.42}
         fontWeight={700}
-        fill='#1F3A5F'
+        fill='#0B3263'
         fontFamily='var(--font-display)'
       >
         B
@@ -57,27 +57,27 @@ export function MapArtwork({
     >
       <defs>
         <pattern id='map-grid' width='50' height='50' patternUnits='userSpaceOnUse'>
-          <path d='M50 0H0V50' fill='none' stroke='#1F3A5F' strokeOpacity='0.06' strokeWidth='1' />
+          <path d='M50 0H0V50' fill='none' stroke='#0B3263' strokeOpacity='0.06' strokeWidth='1' />
         </pattern>
         <pattern id='map-streets' width='34' height='34' patternUnits='userSpaceOnUse' patternTransform='rotate(42)'>
-          <path d='M34 0H0V34' fill='none' stroke='#1F3A5F' strokeOpacity='0.07' strokeWidth='1.5' />
+          <path d='M34 0H0V34' fill='none' stroke='#0B3263' strokeOpacity='0.07' strokeWidth='1.5' />
         </pattern>
         <radialGradient id='map-vignette' cx='50%' cy='50%' r='70%'>
-          <stop offset='60%' stopColor='#F5EBD7' stopOpacity='0' />
-          <stop offset='100%' stopColor='#C8963E' stopOpacity='0.28' />
+          <stop offset='60%' stopColor='#F5F9FD' stopOpacity='0' />
+          <stop offset='100%' stopColor='#5088C0' stopOpacity='0.22' />
         </radialGradient>
       </defs>
 
-      <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill='#F3E6CA' />
+      <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill='#EEF4FA' />
       <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill='url(#map-streets)' />
       <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill='url(#map-grid)' />
 
       {/* Bờ đông sông Sài Gòn (Thủ Thiêm) */}
-      <path d='M905 0 C860 120 930 220 860 320 S760 470 840 560 S960 640 1000 650 V0 Z' fill='#E6DDBF' stroke='none' />
+      <path d='M905 0 C860 120 930 220 860 320 S760 470 840 560 S960 640 1000 650 V0 Z' fill='#E3ECF5' stroke='none' />
 
       {/* Công viên */}
-      <ellipse cx='455' cy='480' rx='48' ry='30' fill='#B7C49A' opacity='0.55' transform='rotate(-30 455 480)' />
-      <ellipse cx='600' cy='300' rx='40' ry='22' fill='#B7C49A' opacity='0.5' transform='rotate(-30 600 300)' />
+      <ellipse cx='455' cy='480' rx='48' ry='30' fill='#CFE88A' opacity='0.55' transform='rotate(-30 455 480)' />
+      <ellipse cx='600' cy='300' rx='40' ry='22' fill='#CFE88A' opacity='0.5' transform='rotate(-30 600 300)' />
 
       {/* Sông Sài Gòn, kênh Nhiêu Lộc – Thị Nghè, kênh Bến Nghé */}
       <path
@@ -113,7 +113,7 @@ export function MapArtwork({
       />
 
       {/* Trục đường chính (nét mảnh) */}
-      <g stroke='#1F3A5F' strokeOpacity='0.18' strokeWidth='3' fill='none' strokeLinecap='round'>
+      <g stroke='#0B3263' strokeOpacity='0.18' strokeWidth='3' fill='none' strokeLinecap='round'>
         <path d='M120 520 L760 120' />
         <path d='M200 640 L620 300 L700 250' />
         <path d='M330 690 L820 330' />
@@ -123,7 +123,7 @@ export function MapArtwork({
 
       <g
         fontFamily='var(--font-display)'
-        fill='#1F3A5F'
+        fill='#0B3263'
         fillOpacity='0.38'
         fontWeight={700}
         letterSpacing='6'
@@ -142,7 +142,7 @@ export function MapArtwork({
           THỦ THIÊM
         </text>
       </g>
-      <text fontFamily='var(--font-display)' fontStyle='italic' fontSize='17' fill='#1F3A5F' fillOpacity='0.6'>
+      <text fontFamily='var(--font-display)' fontStyle='italic' fontSize='17' fill='#0B3263' fillOpacity='0.6'>
         <textPath href='#river-path' startOffset='14%'>
           Sông Sài Gòn
         </textPath>
@@ -153,7 +153,7 @@ export function MapArtwork({
         fontFamily='var(--font-display)'
         fontStyle='italic'
         fontSize='14'
-        fill='#1F3A5F'
+        fill='#0B3263'
         fillOpacity='0.55'
       >
         Kênh Nhiêu Lộc – Thị Nghè
@@ -164,7 +164,7 @@ export function MapArtwork({
         fontFamily='var(--font-display)'
         fontStyle='italic'
         fontSize='14'
-        fill='#1F3A5F'
+        fill='#0B3263'
         fillOpacity='0.55'
       >
         Kênh Bến Nghé
@@ -173,9 +173,9 @@ export function MapArtwork({
       <CompassRose x={80} y={92} r={38} />
 
       {/* Thước tỉ lệ minh hoạ */}
-      <g transform='translate(40 610)' fontFamily='var(--font-body)' fontSize='11' fill='#1F3A5F' fillOpacity='0.7'>
-        <rect width='60' height='6' fill='#1F3A5F' fillOpacity='0.7' />
-        <rect x='60' width='60' height='6' fill='none' stroke='#1F3A5F' strokeOpacity='0.7' />
+      <g transform='translate(40 610)' fontFamily='var(--font-body)' fontSize='11' fill='#0B3263' fillOpacity='0.7'>
+        <rect width='60' height='6' fill='#0B3263' fillOpacity='0.7' />
+        <rect x='60' width='60' height='6' fill='none' stroke='#0B3263' strokeOpacity='0.7' />
         <text y='22'>0</text>
         <text x='108' y='22'>
           1 km
@@ -186,7 +186,7 @@ export function MapArtwork({
         <path
           d={routePath()}
           fill='none'
-          stroke='#B5432F'
+          stroke='#5088C0'
           strokeWidth='4'
           strokeLinecap='round'
           strokeDasharray='2 12'
@@ -202,7 +202,7 @@ export function MapArtwork({
         width={MAP_WIDTH - 12}
         height={MAP_HEIGHT - 12}
         fill='none'
-        stroke='#8A6420'
+        stroke='#0B3263'
         strokeOpacity='0.6'
         strokeWidth='2'
       />
@@ -212,7 +212,7 @@ export function MapArtwork({
         width={MAP_WIDTH - 28}
         height={MAP_HEIGHT - 28}
         fill='none'
-        stroke='#8A6420'
+        stroke='#0B3263'
         strokeOpacity='0.35'
         strokeWidth='1'
       />

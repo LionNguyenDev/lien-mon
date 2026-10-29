@@ -8,7 +8,7 @@ import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 import { cn } from '@/lib/utils';
 import { type PointerEvent, type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
-const INTERVAL = 5500;
+const INTERVAL = 3000;
 // Chiều cao dải giấy dưới ảnh (ghi tên địa điểm) và viền khung, dùng để tính cỡ ảnh vừa khung.
 const CAPTION_HEIGHT = 64;
 const FRAME_PADDING = 10;
@@ -21,8 +21,8 @@ const SLIDES: Slide[] = [
     title: 'TP. Hồ Chí Minh',
     label: 'HÀNH TRÌNH DI SẢN',
     image: {
-      src: '/images/dinh-doc-lap/toan-canh.jpg',
-      alt: 'Toàn cảnh trung tâm TP. Hồ Chí Minh nhìn từ trên cao, Dinh Độc Lập giữa mảng cây xanh',
+      src: '/images/home/tphcm.jpg',
+      alt: 'Toàn cảnh trung tâm TP. Hồ Chí Minh về đêm bên sông Sài Gòn, các tòa nhà cao tầng rực đèn',
     },
   },
   ...LOCATIONS.map((location) => ({
@@ -67,8 +67,9 @@ function PostcardFrame({ slide, index, active }: { slide: Slide; index: number; 
         )}
       </div>
       <div className='flex flex-col justify-center px-1' style={{ height: CAPTION_HEIGHT }}>
-        <span className='font-semibold text-[10px] text-brick uppercase tracking-[0.22em] sm:text-[11px]'>
-          {String(index + 1).padStart(2, '0')}/{String(SLIDES.length).padStart(2, '0')} · {slide.label}
+        <span className='font-semibold text-[10px] text-azure-dark uppercase tracking-[0.22em] sm:text-[11px]'>
+          {index > 0 && `${String(index).padStart(2, '0')}/${String(LOCATIONS.length).padStart(2, '0')} · `}
+          {slide.label}
         </span>
         <span className='truncate font-bold font-display text-base text-navy sm:text-lg'>{slide.title}</span>
       </div>
@@ -187,7 +188,7 @@ export function HeroCarousel({ children }: { children: ReactNode }) {
                 <span
                   className={cn(
                     'block h-2 rounded-full transition-all duration-300',
-                    i === index ? 'w-5 bg-brass-light' : 'w-2 bg-paper/50 group-hover:bg-paper'
+                    i === index ? 'w-5 bg-pastel' : 'w-2 bg-paper/50 group-hover:bg-paper'
                   )}
                 />
               </button>

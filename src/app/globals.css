@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #f5ebd7;
-  --foreground: #1f3a5f;
+  --background: #f5f9fd;
+  --foreground: #0b3263;
 }
 
 body {
@@ -16,23 +16,23 @@ body {
 
 @layer base {
   ::selection {
-    background: rgba(200, 150, 62, 0.35);
+    background: rgba(80, 136, 192, 0.3);
   }
 
   :focus-visible {
-    outline: 3px solid #c8963e;
+    outline: 3px solid #2f6499;
     outline-offset: 3px;
   }
 }
 
 @layer components {
-  /* Giấy cũ: lớp vân mờ dùng chung cho các trang nền kem */
+  /* Lớp vân lưới mờ dùng chung cho các trang nền sáng */
   .paper-texture {
-    background-color: #f5ebd7;
-    background-image: radial-gradient(circle at 15% 10%, rgba(200, 150, 62, 0.12), transparent 45%),
-      radial-gradient(circle at 85% 90%, rgba(181, 67, 47, 0.08), transparent 40%),
-      repeating-linear-gradient(0deg, rgba(31, 58, 95, 0.025) 0 1px, transparent 1px 28px),
-      repeating-linear-gradient(90deg, rgba(31, 58, 95, 0.025) 0 1px, transparent 1px 28px);
+    background-color: #f5f9fd;
+    background-image: radial-gradient(circle at 15% 10%, rgba(232, 248, 176, 0.45), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(80, 136, 192, 0.12), transparent 40%),
+      repeating-linear-gradient(0deg, rgba(11, 50, 99, 0.03) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, rgba(11, 50, 99, 0.03) 0 1px, transparent 1px 28px);
   }
 }
 
