@@ -42,7 +42,7 @@ export const LOCATIONS: JourneyLocation[] = [
     slug: 'truong-thpt-le-quy-don',
     name: 'Trường THPT Lê Quý Đôn',
     label: 'NƠI BẮT ĐẦU',
-    subtitle: 'Mái trường gần 150 năm tuổi, nơi lưu giữ truyền thống hiếu học của Sài Gòn',
+    subtitle: 'Mái trường hơn 150 năm tuổi, nơi lưu giữ truyền thống hiếu học của Sài Gòn',
     facts: [
       { label: 'Khởi công', value: '1874' },
       { label: 'Hoàn thành', value: '1877' },
